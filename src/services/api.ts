@@ -6,19 +6,19 @@ const http = axios.create({
 
 export const api = {
   //funcoes
-  getAllAlbuns: async () => {
-    let response = await http.get("/abuns");
+  getAllAlbums: async () => {
+    let response = await http.get("/albums");
     return response.data;
   },
   getAlbumToPagination: async (page: number, limit: number) => {
-    const pageLimit = (page - 1) * limit <= 0 ? 0 : ((page - 1) * limit);
+    const pageLimit = ((page - 1) * limit) <= 0 ? 0 : ((page - 1) * limit);
     let response = await http.get(
       `/albums?_start=${pageLimit}&_limit=${limit}`
     );
     return response.data;
   },
   getAlbum: async (id: number) => {
-    let response = await http.get("/albuns", { params: { id } });
+    let response = await http.get("/albums", { params: { id } });
     return response.data[0];
   },
   getAllPhotos: async (albumId: number) => {
@@ -26,7 +26,7 @@ export const api = {
     return response.data
   },
   getPhoto : async(id:number) =>{
-    let response = await http.get('/photos',{params: {id}})
-    return response.data
+    let response = await http.get("/photos",{params: {id}})
+    return response.data[0]
   }
 }
